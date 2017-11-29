@@ -75,11 +75,11 @@ public class DataLoader implements ApplicationRunner{
 				orderCost+=10.00;
 			
 			if(i==1)			
-				orderDAO.save(new Order(1,1,"Larkin's flowers",orderContents,orderCost));
+				orderDAO.save(new Order(1,"Larkin's flowers",orderContents,orderCost));
 			else if (i==2)
-				orderDAO.save(new Order(2,2,"Ryan's flowers", orderContents, orderCost));
+				orderDAO.save(new Order(2,"Ryan's flowers", orderContents, orderCost));
 			else
-				orderDAO.save(new Order(3,3,"Philie's flowers", orderContents, orderCost));
+				orderDAO.save(new Order(3,"Philie's flowers", orderContents, orderCost));
 
 		}
 
