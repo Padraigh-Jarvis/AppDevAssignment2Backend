@@ -1,5 +1,7 @@
 package ie.cit.appdev.assginment2backend.utils;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +22,28 @@ public class Worker {
 	OrderRepo orderDAO;
 	
 	
+	
+	public Flower flowerDetails(int id)
+	{
+		return flowerDAO.findOne(id);
+	}
+	public List<Flower> allFlowers()
+	{
+		return flowerDAO.findAll();
+	}
+	public List<Order> myOrders(int id)
+	{
+		return orderDAO.findByFlorestId(id);
+	}
+	public void deleteOrder(String id)
+	{
+		orderDAO.delete(id);
+	}
+		
+	
 	@Transactional
 	public boolean makeOrder(Order order)
 	{
-		
 		for(Flower flower: order.getContents())
 		{
 			int currentFlowerStock= flowerDAO.findOne(flower.getId()).getQuantity();
@@ -38,6 +58,4 @@ public class Worker {
 		}
 		return false;
 	}
-	
-	
 }

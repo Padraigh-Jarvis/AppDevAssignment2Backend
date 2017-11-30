@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,38 +12,33 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ie.cit.appdev.assginment2backend.entities.Flower;
 import ie.cit.appdev.assginment2backend.entities.Order;
-import ie.cit.appdev.assginment2backend.repositories.FlowerRepo;
-import ie.cit.appdev.assginment2backend.repositories.OrderRepo;
 import ie.cit.appdev.assginment2backend.utils.Worker;
 
 @RestController
 public class Controller {
-	
+
 	@Autowired
-	OrderRepo orderDAO;
-	
-	@Autowired
-	FlowerRepo flowerDAO;
-	
-	@Autowired
-	Worker worker;
+	private Worker worker;
 	
 	@GetMapping("/flowerDetails")
 	public Flower flowerDetails(@RequestParam(value="id") int id)
-	{
-		return flowerDAO.findOne(id);
+	{		
+		Flower f =worker.flowerDetails(id);
+		return f;
 	}
 	
 	@GetMapping("/myOrders") 
 	public List<Order> myOrders(@RequestParam(value="id")int id)
 	{
-		return orderDAO.findByFlorestId(id);
+		List<Order> orders = worker.myOrders(id);
+		return orders;
 	}
 
 	@GetMapping("/allFlowers")
 	public List<Flower> allFlowers()
 	{
-		return flowerDAO.findAll();
+		List<Flower> flowers = worker.allFlowers();
+		return flowers;
 	}
 	
 	@PostMapping("/makeOrder")
@@ -52,10 +48,10 @@ public class Controller {
 		return success;
 	}
 	
-	@DeleteMapping("/deleteOrder")
-	public void deleteOrder(@RequestBody String orderId)
+	@DeleteMapping("/deleteOrder/{orderId}")
+	public void deleteOrder(@PathVariable String orderId)
 	{
-		orderDAO.delete(orderId);
+		worker.deleteOrder(orderId);
 	}
 
 	

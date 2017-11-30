@@ -24,10 +24,6 @@ public class DataLoader implements ApplicationRunner{
 
 		populateFlowers();
 		populateOrders();
-
-
-
-
 	}
 	private void populateFlowers() {
 		flowerDAO.save(new Flower(1,"Rose",0.50,1000));
