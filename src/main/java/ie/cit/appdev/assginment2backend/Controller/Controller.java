@@ -21,7 +21,7 @@ public class Controller {
 	private Worker worker;
 	
 	@GetMapping("/flowerDetails")
-	public Flower flowerDetails(@RequestParam(value="id") int id)
+	public Flower flowerDetails(@RequestParam(value="id") String id)
 	{		
 		Flower f =worker.flowerDetails(id);
 		return f;

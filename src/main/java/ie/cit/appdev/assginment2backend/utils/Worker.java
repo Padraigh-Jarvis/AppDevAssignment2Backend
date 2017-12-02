@@ -23,7 +23,7 @@ public class Worker {
 	
 	
 	
-	public Flower flowerDetails(int id)
+	public Flower flowerDetails(String id)
 	{
 		return flowerDAO.findOne(id);
 	}
